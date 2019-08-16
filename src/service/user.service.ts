@@ -28,18 +28,12 @@ export class UserService {
    *  Read all Users and look for one user
    *  return a user
    */
-<<<<<<< HEAD
-  getUserByKey(key: string): Observable<any>
-=======
   getUser(key: string): Observable<any>
->>>>>>> 7cf18c3e35f2f0f0bc5f26a57f31fc7a2b39bf52
   {
     return this.http.get<any>(this.url + 'user/' + key);
   }
 
   /**
-<<<<<<< HEAD
-=======
    *  Add a new User to the table
    *  @param User
    *  @return Observable
@@ -69,7 +63,6 @@ export class UserService {
   }
 
   /**
->>>>>>> 7cf18c3e35f2f0f0bc5f26a57f31fc7a2b39bf52
    * Handle Http operation that failed.
    * Let the app continue.
    * @param operation - name of the operation that failed

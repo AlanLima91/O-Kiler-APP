@@ -16,12 +16,6 @@ export class Tab2Page {
 
 	onSubmit(form)
 	{
-		const httpOptions = {
-			headers: new HttpHeaders({
-				'Content-Type':  'application/json',
-				'Accept':  'application/json'
-			})
-		};
 		
 		console.log("Form value : ",form.form.value);
 		this.http.patch('https://o-killer.herokuapp.com/user/5d54a0d24c99c61a8811d32f',form.form.value,httpOptions).subscribe(data => {
@@ -29,15 +23,14 @@ export class Tab2Page {
 			//this.router.navigateByUrl('');
 			console.log(data);
 		})
-		
-		
+
 	}
 
 	async editForm()
 	{
 		const edit = await this.alertController.create({
 			header: 'User updated',
-			message: 'Your are join the party',
+			message: 'You are join the party',
 			buttons:[
 			{
 				text: 'OK',
