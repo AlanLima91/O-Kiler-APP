@@ -1,30 +1,26 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab Two
+      Join Game
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-<<<<<<< HEAD
 	<form (ngSubmit)="onSubmit(f)" #f="ngForm">
 	    <ion-item>
-	      <ion-label>Username"</ion-label>
-	      <ion-input type="text" name="name" [ngModel]="user?.name" required></ion-input><br>
+	      <ion-label position="stacked">Username<ion-text color="danger">*</ion-text></ion-label>
+	      <ion-input type="text" name="username" [ngModel]="user?.username" required></ion-input>
 	    </ion-item>
 
 	    <ion-item>
-	        <ion-label>Password</ion-label>
-	        <ion-input type="password" name="password" [ngModel]="user?.password" required></ion-input><br>
+	        <ion-label position="stacked">Password<ion-text color="danger">*</ion-text></ion-label>
+	        <ion-input type="password" name="password" [ngModel]="user?.password" required></ion-input>
 	    </ion-item>
 
 
-	    <div class="col-12 mt-5">
-	      <ion-button type="submit" size="full">Edit</ion-button>
+	    <div class="ion-padding">
+	      <ion-button expand="block" type="submit" class="ion-no-margin" size="full">Join</ion-button>
 	    </div>
 	  </form>
-=======
-  
->>>>>>> 7cf18c3e35f2f0f0bc5f26a57f31fc7a2b39bf52
 </ion-content>

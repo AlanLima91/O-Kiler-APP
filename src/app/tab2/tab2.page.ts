@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { Router } from '@angular/router';
-import { HTTP } from '@ionic-native/http/ngx';
+import { Router, ActivatedRoute } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-tab2',
@@ -12,24 +12,28 @@ export class Tab2Page {
 	gameplayKey: string;
   	user:Object;
 	
-	/*  constructor(private router: Router, private alertController: AlertController,private http: HTTP)
- 		{}
+	constructor(private route: ActivatedRoute,private router: Router, private alertController: AlertController, private http: HttpClient){}
 
-	/*onSubmit(form)
+	onSubmit(form)
 	{
-
+		const httpOptions = {
+			headers: new HttpHeaders({
+				'Content-Type':  'application/json',
+				'Accept':  'application/json'
+			})
+		};
+		
 		console.log("Form value : ",form.form.value);
-		/*this.http.patch('https://o-killer.herokuapp.com/user/'+this.gameplayKey,form.form.value,{}).then(data => {
-			/*this.editForm();
-			this.router.navigateByUrl('');*/
-			//console.log(data);
-		//})
+		this.http.patch('https://o-killer.herokuapp.com/user/5d54a0d24c99c61a8811d32f',form.form.value,httpOptions).subscribe(data => {
+			this.editForm();
+			//this.router.navigateByUrl('');
+			console.log(data);
+		})
 		
 		
-	//}
+	}
 
-
-	/*async editForm()
+	async editForm()
 	{
 		const edit = await this.alertController.create({
 			header: 'User updated',
@@ -42,6 +46,6 @@ export class Tab2Page {
 			]
 		});
 		await edit.present();
-	}*/
+	}
 
 }
