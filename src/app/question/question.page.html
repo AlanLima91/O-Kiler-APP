@@ -6,27 +6,27 @@
 
 <ion-content>
   <ion-card margin>
-    <ion-card-header padding>
+    <ion-card-header>
       <ion-card-subtitle text-center>
         {{ question?.value }}
       </ion-card-subtitle>
     </ion-card-header>
     <ion-grid fixed>
-      <ion-row>
+      <ion-row justify-content-around margin>
         <ion-col size="12">
           <ion-button (click)="onClick(0)" color=medium fill=outline shape=block>
               {{ question?.answer[0] }}
           </ion-button>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row justify-content-around margin>
         <ion-col size="12">
           <ion-button (click)="onClick(1)" color=medium fill=outline shape=block>
               {{ question?.answer[1] }}
             </ion-button>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row justify-content-around margin>
         <ion-col size="12">
           <ion-button (click)="onClick(2)" color=medium fill=outline shape=block>
             {{ question?.answer[2] }}
