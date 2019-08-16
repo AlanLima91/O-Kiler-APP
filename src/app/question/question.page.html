@@ -29,4 +29,11 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  
+  <ion-card ngFor*="let question of questionList">
+    <ion-card-header>
+      <ion-card-subtitle>{{ question?.value }}</ion-card-subtitle>
+      <ion-card-title>{{ question?.answer[0] }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
 </ion-content>
