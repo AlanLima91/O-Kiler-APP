@@ -28,10 +28,12 @@ export class QuestionPage implements OnInit {
     let tag = this.question.tags[value];
     console.log(value);
     console.log(tag);
+    this.router.navigate(['./action']);
   }
 
   random() {
     console.log(this.questionList.length);
     return Math.floor((Math.random() * this.questionList.length))
   }
+
 }

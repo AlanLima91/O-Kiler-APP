@@ -38,6 +38,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'question',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../question/question.module').then(m => m.QuestionPageModule)
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'
