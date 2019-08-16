@@ -11,16 +11,22 @@ import { UserService } from '../service/user.service';
 export class Tab2Page {
 	gameplayKey: string;
   	user:Object;
-	
+	test:boolean;
+	idGameplay:string;
 	constructor(private route: ActivatedRoute,private router: Router, private alertController: AlertController, private userService: UserService){}
 
+
+	ngOnInit(){
+		this.test = false;
+	}
+
 	onSubmit(form)
-	{		
+	{
 		console.log("Form value : ",form.form.value);
 
 		this.userService.updateUser('5d54a0d24c99c61a8811d32f', form.form.value).subscribe(data => {
 			this.editForm();
-		})
+		});
 	}
 
 	async editForm()
@@ -36,5 +42,10 @@ export class Tab2Page {
 			]
 		});
 		await edit.present();
+	}
+
+	getGameplay(){
+		console.log(this.idGameplay);
+		this.test = true;
 	}
 }
