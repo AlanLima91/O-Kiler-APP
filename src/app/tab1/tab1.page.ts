@@ -8,7 +8,11 @@ import { Router, NavigationExtras } from '@angular/router';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page implements OnInit {
-  gameplay: any = null; 
+  
+  choice    : boolean = false; 
+  new       : boolean = false;
+  join : boolean = false;
+  log     : boolean = false;
 
   constructor(private router: Router) {}
 
@@ -16,13 +20,33 @@ export class Tab1Page implements OnInit {
 
   }
 
+  onSubmit(form) {
+    console.log('formSubmit');
+  }
+
   newGame() {
+    console.log('new');
+    this.choice = true;
+    this.new    = true;
   }
 
   joinParty() {
+    console.log('joinParty');
+    this.choice = true;
+    this.join    = true;
   }
 
   logIn() {
+    console.log('logIn');
+    this.choice = true;
+    this.log    = true;
+  }
+
+  back() {
+    this.choice = false;
+    this.new = false;
+    this.join = false;
+    this.log = false;
   }
 
   /**

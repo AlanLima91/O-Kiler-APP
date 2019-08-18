@@ -6,37 +6,130 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-card>
-    <ion-header>
-      <ion-button (click)="newGame()" color=medium fill=outline shape=block>
-        New Game
-      </ion-button>
-    </ion-header>
-  </ion-card>
-  <ion-card>
-    <ion-button (click)="joinParty()"  color=medium fill=outline shape=block>
-      Join Party
-    </ion-button>
-  </ion-card>
-  <ion-card>
-    <ion-button (click)="logIn()"  color=medium fill=outline shape=block>
-      LogIn
-    </ion-button>
-  </ion-card>
+<!-- This is display at the begining -->
 
-    <ion-grid>
-      <ion-row>
-        <ion-col size="6" color=primary>1</ion-col>
-        <ion-col size="6" color=medium>2</ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="6" color=medium>3</ion-col>
-        <ion-col size="6" color=primary>4</ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="6" color=primary>5</ion-col>
-        <ion-col size="6" color=medium>6</ion-col>
-      </ion-row>
-    </ion-grid>
+<ion-content>
+  <div *ngIf="!choice; else form">
+    <ion-card>
+      <ion-header>
+        <ion-button (click)="newGame()" color=medium fill=outline shape=block>
+          New Game
+        </ion-button>
+      </ion-header>
+    </ion-card>
+    <ion-card>
+      <ion-button (click)="joinParty()" color=medium fill=outline shape=block>
+        Join Party
+      </ion-button>
+    </ion-card>
+    <ion-card>
+      <ion-button (click)="logIn()" color=medium fill=outline shape=block>
+        LogIn
+      </ion-button>
+    </ion-card>
+  </div>
+
+  <!-- When the user click on a button, it display the forms of his choice -->
+
+  <ng-template #form>
+    <form *ngIf="new && choice">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title text-center>New Party</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item>
+            <ion-input type="text" placeholder="Number Of Players" name="nbGamers"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-input type="text" placeholder="Difficulty Level" name="level"></ion-input>
+          </ion-item>
+          <ion-grid fixed>
+            <ion-row>
+              <ion-col size="6">
+                <ion-button (click)="back()" fill=outline color=medium expand=block>
+                  <ion-icon slot="icon-only" name="arrow-round-back"></ion-icon>
+                </ion-button>
+              </ion-col>
+
+              <ion-col size="6">
+                <ion-button (click)="submit(form)" color=medium expand=full>
+                  <ion-icon slot="icon-only" name="arrow-round-forward"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </form>
+
+    <form *ngIf="join && choice">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title text-center>Join Party</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item>
+            <ion-input type="text" placeholder="Party ID" name="_id"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-input type="text" placeholder="Username" name="username"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-input type="password" placeholder="Password" name="password"></ion-input>
+          </ion-item>
+          <ion-grid fixed>
+            <ion-row>
+              <ion-col size="6">
+                <ion-button (click)="back()" fill=outline color=medium expand=block>
+                  <ion-icon slot="icon-only" name="arrow-round-back"></ion-icon>
+                </ion-button>
+              </ion-col>
+
+              <ion-col size="6">
+                <ion-button (click)="submit(form)" color=medium expand=full>
+                  <ion-icon slot="icon-only" name="arrow-round-forward"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </form>
+
+    <form *ngIf="log && choice">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title text-center>LogIn</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item>
+            <ion-input type="text" placeholder="Username" name="username"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-input type="password" placeholder="Password" name="Password"></ion-input>
+          </ion-item>
+          <ion-grid fixed>
+            <ion-row>
+              <ion-col size="6">
+                <ion-button (click)="back()" fill=outline color=medium expand=block>
+                  <ion-icon slot="icon-only" name="arrow-round-back"></ion-icon>
+                </ion-button>
+              </ion-col>
+
+              <ion-col size="6">
+                <ion-button (click)="submit(form)" color=medium expand=full>
+                  <ion-icon slot="icon-only" name="arrow-round-forward"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </form>
+  </ng-template>
 </ion-content>
