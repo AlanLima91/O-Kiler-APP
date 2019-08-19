@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationExtras } from '@angular/router';
+import { Router } from '@angular/router';
+import { GameplayService } from '../service/gameplay.service';
+import { UserService } from '../service/user.service';
+import { Gameplay } from '../class/gameplay';
+import { User } from '../class/user';
 
 
 @Component({
@@ -8,19 +12,42 @@ import { Router, NavigationExtras } from '@angular/router';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page implements OnInit {
-  
-  choice    : boolean = false; 
-  new       : boolean = false;
-  join : boolean = false;
+
+  choice  : boolean = false;
+  new     : boolean = false;
+  join    : boolean = false;
   log     : boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private gameplayService: GameplayService, private userService: UserService) {}
 
   ngOnInit() {
 
   }
 
-  onSubmit(form) {
+  onSubmitNew(form) {
+    let gameplay : Gameplay = new Gameplay(
+      form.form.value.name,
+      form.form.value.level,
+      form.form.value.nbJoueur
+    );
+    this.gameplayService.postGameplay(gameplay).subscribe(data => {
+      // Main Goal : Try to send the response to the next page.
+      console.log(data);
+      console.log(gameplay);
+    });
+  }
+
+  onSubmitJoin(form) {
+    let gameplay = form.form.value._id;
+    this.gameplayService.getGameplay(gameplay).subscribe(data => {
+      // MAIN GOAL : Recup an ID of User not set already to update it
+    })
+    console.log('formSubmit');
+  }
+
+  onSubmitLogIn(form) {
+    let user : User = new User(null, form.form.value.username, null, form.form.value.password);
+
     console.log('formSubmit');
   }
 
@@ -48,30 +75,4 @@ export class Tab1Page implements OnInit {
     this.join = false;
     this.log = false;
   }
-
-  /**
-   * The goal here is to pass information from a page to another
-   * Start point
-   */
-  // test() {
-  //   let navigationExtras: NavigationExtras = {
-  //     state: {
-  //       gameplay: this.gameplay
-  //     }
-  //   };
-  //   this.router.navigate(['where'], navigationExtras);
-  // }
-
-  /**
-   *    The Other side
-   */
-  // data: any;
- 
-  // constructor(private route: ActivatedRoute, private router: Router) {
-  //   this.route.queryParams.subscribe(params => {
-  //     if (this.router.getCurrentNavigation().extras.state) {
-  //       this.data = this.router.getCurrentNavigation().extras.state.user;
-  //     }
-  //   });
-  // }
 }
