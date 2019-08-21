@@ -9,16 +9,11 @@ import { UserService } from '../service/user.service';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-	gameplayKey: string;
-  	user:Object;
-	test:boolean;
-	idGameplay:string;
-	constructor(private route: ActivatedRoute,private router: Router, private alertController: AlertController, private userService: UserService){}
-
-
-	ngOnInit(){
-		this.test = false;
-	}
+	gameplayKey	: string;
+  	user		: Object;
+	test		: boolean = false;
+	idGameplay	: string;
+	constructor(private route: ActivatedRoute,private router: Router, private alertController: AlertController, private userService: UserService) {}
 
 	onSubmit(form)
 	{
