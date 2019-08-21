@@ -8,22 +8,22 @@
 
 <!-- This is display at the begining -->
 
-<ion-content>
+<ion-content color=medium>
   <div *ngIf="!choice; else forms" padding>
-    <ion-card>
+    <ion-card color=light>
       <ion-header>
-        <ion-button (click)="newGame()" color=medium fill=outline shape=block>
+        <ion-button (click)="newGame()" color=dark fill=clear shape=block>
           New Game
         </ion-button>
       </ion-header>
     </ion-card>
-    <ion-card>
-      <ion-button (click)="joinParty()" color=medium fill=outline shape=block>
+    <ion-card color=light>
+      <ion-button (click)="joinParty()" color=dark fill=clear shape=block>
         Join Party
       </ion-button>
     </ion-card>
-    <ion-card>
-      <ion-button (click)="logIn()" color=medium fill=outline shape=block>
+    <ion-card color=light>
+      <ion-button (click)="logIn()" color=dark fill=clear shape=block>
         LogIn
       </ion-button>
     </ion-card>
@@ -33,7 +33,7 @@
 
   <ng-template #forms>
     <form *ngIf="new && choice" (ngSubmit)="onSubmitNew(fnc)" #fnc="ngForm">
-      <ion-card>
+      <ion-card color=light>
         <ion-card-header>
           <ion-card-title text-center>New Party</ion-card-title>
         </ion-card-header>
@@ -58,7 +58,7 @@
               </ion-col>
 
               <ion-col size="6">
-                <ion-button (click)="onSubmitNew(fnc)" color=medium expand=block fill=solid>
+                <ion-button (click)="onSubmitNew(fnc)" color=dark expand=block fill=solid>
                   <ion-icon slot="icon-only" name="arrow-round-forward"></ion-icon>
                 </ion-button>
               </ion-col>
@@ -69,7 +69,7 @@
     </form>
 
     <form *ngIf="join && choice" (ngSubmit)="onSubmitJoin(fjc)" #fjc="ngForm">
-      <ion-card>
+      <ion-card color=light>
         <ion-card-header>
           <ion-card-title text-center>Join Party</ion-card-title>
         </ion-card-header>
@@ -94,7 +94,7 @@
               </ion-col>
 
               <ion-col size="6">
-                <ion-button (click)="onSubmitJoin(form)" color=medium expand=block fill=solid>
+                <ion-button (click)="onSubmitJoin(fjc)" color=dark expand=block fill=solid>
                   <ion-icon slot="icon-only" name="arrow-round-forward"></ion-icon>
                 </ion-button>
               </ion-col>
@@ -104,8 +104,8 @@
       </ion-card>
     </form>
 
-    <form *ngIf="log && choice" (ngSubmit)="onSubmitLogIn(f)" #flic="ngForm">
-      <ion-card>
+    <form *ngIf="log && choice" (ngSubmit)="onSubmitLogIn(flic)" #flic="ngForm">
+      <ion-card color=light>
         <ion-card-header>
           <ion-card-title text-center>LogIn</ion-card-title>
         </ion-card-header>
@@ -126,7 +126,7 @@
               </ion-col>
 
               <ion-col size="6">
-                <ion-button (click)="onSubmitLogIn(form)" color=medium expand=block fill=solid>
+                <ion-button (click)="onSubmitLogIn(flic)" color=dark expand=block fill=solid>
                   <ion-icon slot="icon-only" name="arrow-round-forward"></ion-icon>
                 </ion-button>
               </ion-col>
