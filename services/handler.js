@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import * as c from './constants';
+import * as c from './constant';
 
 export function handler(err) {
     let error = err;

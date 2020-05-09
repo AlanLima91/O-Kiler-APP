@@ -1,6 +1,8 @@
-export const API_URL = 'http://192.168.1.99:8000/';
+export const API_URL = 'http://192.168.1.99:8000';
 
 export const LOGIN = `${API_URL}/login`;
+export const LOGINJWT = `${API_URL}/loginjwt`;
+export const REGISTER = `${API_URL}/register`;
 export const USER = `${API_URL}/user`;
 export const ACTION = `${API_URL}/action`;
 export const ACTIONTYPE = `${API_URL}/actiontype`;

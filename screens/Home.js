@@ -4,8 +4,17 @@ import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { MonoText } from '../components/StyledText';
-
-export default function HomeScreen() {
+import { useAuth } from "../services/provider";
+export default function HomeScreen(props) {
+  const {handleLogout} = useAuth();
+  const handleLogoutPress = async ()=>{
+    try {
+      await handleLogout();
+      props.navigation.navigate("Login");
+    } catch(e){
+      console.log(e);
+    }
+  }
   return (
     <View style={styles.container}>
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
@@ -35,19 +44,11 @@ export default function HomeScreen() {
         </View>
 
         <View style={styles.helpContainer}>
-          <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-            <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
+          <TouchableOpacity onPress={handleLogoutPress} style={styles.helpLink}>
+            <Text style={styles.helpLinkText}>Logout</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
-
-      <View style={styles.tabBarInfoContainer}>
-        <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
-
-        <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-          <MonoText style={styles.codeHighlightText}>navigation/BottomTabNavigator.js</MonoText>
-        </View>
-      </View>
     </View>
   );
 }
