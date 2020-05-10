@@ -1,4 +1,4 @@
-export const API_URL = 'http://192.168.1.99:8000';
+export const API_URL = 'https://o-killer.herokuapp.com';
 
 export const LOGIN = `${API_URL}/login`;
 export const LOGINJWT = `${API_URL}/loginjwt`;
