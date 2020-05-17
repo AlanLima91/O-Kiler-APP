@@ -3,13 +3,14 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/Home';
 import AnswerScreen from '../screens/Answer';
-
+import TagScreen from '../screens/Tag';
+import LoginScreen from '../screens/Login';
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
 import AuthProvider ,{ useAuth } from "../services/provider";
 
 export default function BottomTabNavigator({navigation, route}) {
-  const {getAuthState} = useAuth();
+  const {getAuthState,handleLogout} = useAuth();
 
   const checkIsLoggin = async () => {
     const user = await getAuthState();
@@ -26,7 +27,7 @@ export default function BottomTabNavigator({navigation, route}) {
           component={HomeScreen}
           options={{
             title: 'Home',
-            tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-code-working" />,
+            tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-home" />,
           }}
         />
         <BottomTab.Screen
@@ -34,7 +35,15 @@ export default function BottomTabNavigator({navigation, route}) {
           component={AnswerScreen}
           options={{
             title: 'Questions',
-            tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
+            tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-help-circle" />,
+          }}
+        />
+        <BottomTab.Screen
+          name="Tags"
+          component={TagScreen}
+          options={{
+            title: 'Tags',
+            tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="hash" type="Feather" />,
           }}
         />
     </BottomTab.Navigator>

@@ -4,7 +4,7 @@ export const BOOL_CHANGE = 'BOOL_CHANGE';
 export const SET_ERROR = 'SET_ERROR';
 export const LOGGED_IN = `LOGGED_IN`;
 export const LOGGED_OUT = `LOGGED_OUT`;
-
+export const LIST_CHANGE = "LIST_CHANGE";
 export const  initialState = {
     isLoggedIn: false,
     user: null
@@ -24,6 +24,14 @@ const reducer = (state, action) => {
             for (var i = 0; i < state.length; i++) {
                 if(state[i].name === action.name) 
                     state[i].value = action.text;
+            }
+            return [...state];
+        }
+
+        case LIST_CHANGE: {
+            for (var i = 0; i < state.length; i++) {
+                if(state[i].name === action.name)
+                    state[i].value = action.data;
             }
             return [...state];
         }
