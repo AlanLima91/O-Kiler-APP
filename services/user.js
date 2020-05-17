@@ -33,3 +33,14 @@ export async function loginJWT(data) {
 		throw handler(e);
 	}
 }
+
+export async function addTags(data) {
+	try {
+		console.log("add tags")
+		let res = await axios.patch(`${c.USER}/addTags`,data);
+
+		return res.data;
+	} catch (e) {
+		throw handler(e);
+	}
+}

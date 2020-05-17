@@ -13,3 +13,13 @@ export async function newQuestion(data) {
 		throw handler(e);
 	}
 }
+
+export async function getAllQuestion(limit) {
+	try {
+		let res = await axios.get(`${c.QUESTION}/all/${limit}`);
+
+		return res.data;
+	} catch (e) {
+		throw handler(e);
+	}
+}

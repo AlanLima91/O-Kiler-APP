@@ -1,12 +1,12 @@
+import React,{useEffect} from 'react';
 import * as WebBrowser from 'expo-web-browser';
-import * as React from 'react';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { MonoText } from '../components/StyledText';
 import { useAuth } from "../services/provider";
 export default function HomeScreen(props) {
-  const {handleLogout} = useAuth();
+  const {handleLogout,state} = useAuth();
   const handleLogoutPress = async ()=>{
     try {
       await handleLogout();
@@ -15,6 +15,13 @@ export default function HomeScreen(props) {
       console.log(e);
     }
   }
+  useEffect(()=> {
+    if (state && state.user) {
+      if (state.user.tags.length === 0) {
+        props.navigation.navigate("Profile");
+      }
+    }
+  },[state])
   return (
     <View style={styles.container}>
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
