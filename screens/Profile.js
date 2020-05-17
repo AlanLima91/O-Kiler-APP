@@ -45,13 +45,15 @@ export default function ProfileScreen() {
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
             <Text>Profile</Text>
             {questions && !qEnd && (
-                <View>
+                <View style={{marginTop:20}}>
                     <Text>Quesion {numQ+1} sur {questions.length} : {questions[numQ].question}</Text>
                     <View>
                         {questions[numQ].answers.map((question,i)=> {
                             return (
-                                <TouchableOpacity onPress={()=> sendAnswer(i)} key={i}>
-                                    <Text>{question.answer}</Text>
+                                <TouchableOpacity style={styles.button} onPress={()=> sendAnswer(i)} key={i}>
+                                    <LinearGradient start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={["#0093FF", "#00DEFF"]} style={styles.answer} >
+                                        <Text style={styles.answerText}>{question.answer}</Text>
+                                    </LinearGradient>
                                 </TouchableOpacity>
                             );
                         })}
@@ -84,8 +86,10 @@ const styles = StyleSheet.create({
     tagList:{
         marginTop:20
     },
-    button : {
-        alignItems: 'center', 
+    button:{
+        marginTop:10,
+    },
+    answer : {
         borderRadius: 15, 
         width: '100%', 
         paddingTop: 13, 
@@ -93,14 +97,8 @@ const styles = StyleSheet.create({
         paddingLeft:Layout.width*0.07,
         paddingRight:Layout.width*0.07
     },
-    buttonSubmit:{
+    answerText:{
         color:"#fff",
         fontWeight:'700'
-    },
-    tagItems:{
-        display:"flex",
-        flexDirection:"row",
-        justifyContent:"space-between",
-        marginTop:10
     },
 });

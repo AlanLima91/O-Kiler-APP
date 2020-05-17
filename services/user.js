@@ -36,7 +36,6 @@ export async function loginJWT(data) {
 
 export async function addTags(data) {
 	try {
-		console.log("add tags")
 		let res = await axios.patch(`${c.USER}/addTags`,data);
 
 		return res.data;
