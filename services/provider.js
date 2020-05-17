@@ -21,7 +21,7 @@ function AuthProvider(props) {
         try {
             //GET DATA
             let data = await getStorageData();
-            console.log(data);
+            
             if (data) await handleLogin(data, true);
             else await handleLogout();
 

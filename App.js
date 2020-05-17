@@ -5,7 +5,9 @@ import { SplashScreen } from 'expo';
 import * as Font from 'expo-font';
 import * as React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-
+import RegisterScreen from './screens/Register';
+import LoginScreen from './screens/Login';
+import AuthProvider from "./services/provider";
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 import LinkingConfiguration from './navigation/LinkingConfiguration';
 
@@ -13,7 +15,6 @@ const Stack = createStackNavigator();
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
-
   // Load any resources or data that we need prior to rendering the app
   React.useEffect(() => {
     async function loadResourcesAndDataAsync() {
@@ -44,9 +45,14 @@ export default function App(props) {
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
         <NavigationContainer linking={LinkingConfiguration}>
-          <Stack.Navigator>
-            <Stack.Screen name="Root" component={BottomTabNavigator} />
-          </Stack.Navigator>
+          <AuthProvider>
+            <Stack.Navigator>
+              <Stack.Screen name='Home' component={BottomTabNavigator} options={{title:"O Killer",headerLeft: null,gesturesEnabled: false,}}/>
+              <Stack.Screen name='Login' component={LoginScreen} options={{title:"Login",headerLeft: null,gesturesEnabled: false,}}/>
+              <Stack.Screen name='Register' component={RegisterScreen} options={{title:"Register",}}/>
+              
+            </Stack.Navigator>
+          </AuthProvider>
         </NavigationContainer>
       </View>
     );
