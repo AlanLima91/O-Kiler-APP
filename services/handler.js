@@ -1,13 +1,11 @@
-import axios from 'axios';
+import axios from 'axios'
 
-import * as c from './constant';
+import * as c from './constant'
 
-export function handler(err) {
-    let error = err;
-  
-    if (err.response && err.response.data.hasOwnProperty("message"))
-        error = err.response.data;
-    else if (!err.hasOwnProperty("message")) error = err.toJSON();
+export function handler (err) {
+  let error = err
 
-    return new Error(error.message);
+  if (err.response && err.response.data.hasOwnProperty('message')) { error = err.response.data } else if (!err.hasOwnProperty('message')) error = err.toJSON()
+
+  return new Error(error.message)
 }

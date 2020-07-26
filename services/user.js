@@ -1,45 +1,45 @@
-import axios from 'axios';
+import axios from 'axios'
 
-import * as c from './constant';
+import * as c from './constant'
 
-import { handler } from './handler';
+import { handler } from './handler'
 
-export async function login(data) {
-	try {
-		let res = await axios.post(c.LOGIN, data);
+export async function login (data) {
+  try {
+    const res = await axios.post(c.LOGIN, data)
 
-		return res.data;
-	} catch (e) {
-		throw handler(e);
-	}
+    return res.data
+  } catch (e) {
+    throw handler(e)
+  }
 }
 
-export async function register(data) {
-	try {
-		let res = await axios.post(c.REGISTER, data);
+export async function register (data) {
+  try {
+    const res = await axios.post(c.REGISTER, data)
 
-		return res.data;
-	} catch (e) {
-		throw handler(e);
-	}
+    return res.data
+  } catch (e) {
+    throw handler(e)
+  }
 }
 
-export async function loginJWT(data) {
-	try {
-		let res = await axios.post(c.LOGINJWT,data);
+export async function loginJWT (data) {
+  try {
+    const res = await axios.post(c.LOGINJWT, data)
 
-		return res.data;
-	} catch (e) {
-		throw handler(e);
-	}
+    return res.data
+  } catch (e) {
+    throw handler(e)
+  }
 }
 
-export async function addTags(data) {
-	try {
-		let res = await axios.patch(`${c.USER}/addTags`,data);
+export async function addTags (data) {
+  try {
+    const res = await axios.patch(`${c.USER}/addTags`, data)
 
-		return res.data;
-	} catch (e) {
-		throw handler(e);
-	}
+    return res.data
+  } catch (e) {
+    throw handler(e)
+  }
 }

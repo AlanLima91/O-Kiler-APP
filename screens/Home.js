@@ -1,27 +1,27 @@
-import React,{useEffect} from 'react';
-import * as WebBrowser from 'expo-web-browser';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import React, { useEffect } from 'react'
+import * as WebBrowser from 'expo-web-browser'
+import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
 
-import { MonoText } from '../components/StyledText';
-import { useAuth } from "../services/provider";
-export default function HomeScreen(props) {
-  const {handleLogout,state} = useAuth();
-  const handleLogoutPress = async ()=>{
+import { MonoText } from '../components/StyledText'
+import { useAuth } from '../services/provider'
+export default function HomeScreen (props) {
+  const { handleLogout, state } = useAuth()
+  const handleLogoutPress = async () => {
     try {
-      await handleLogout();
-      props.navigation.navigate("Login");
-    } catch(e){
-      console.log(e);
+      await handleLogout()
+      props.navigation.navigate('Login')
+    } catch (e) {
+      console.log(e)
     }
   }
-  useEffect(()=> {
+  useEffect(() => {
     if (state && state.user) {
       if (state.user.tags.length === 0) {
-        props.navigation.navigate("Profile");
+        props.navigation.navigate('Profile')
       }
     }
-  },[state])
+  }, [state])
   return (
     <View style={styles.container}>
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
@@ -57,131 +57,131 @@ export default function HomeScreen(props) {
         </View>
       </ScrollView>
     </View>
-  );
+  )
 }
 
 HomeScreen.navigationOptions = {
-  header: null,
-};
+  header: null
+}
 
-function DevelopmentModeNotice() {
+function DevelopmentModeNotice () {
   if (__DEV__) {
     const learnMoreButton = (
       <Text onPress={handleLearnMorePress} style={styles.helpLinkText}>
         Learn more
       </Text>
-    );
+    )
 
     return (
       <Text style={styles.developmentModeText}>
         Development mode is enabled: your app will be slower but you can use useful development
         tools. {learnMoreButton}
       </Text>
-    );
+    )
   } else {
     return (
       <Text style={styles.developmentModeText}>
         You are not in development mode: your app will run at full speed.
       </Text>
-    );
+    )
   }
 }
 
-function handleLearnMorePress() {
-  WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/workflow/development-mode/');
+function handleLearnMorePress () {
+  WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/workflow/development-mode/')
 }
 
-function handleHelpPress() {
+function handleHelpPress () {
   WebBrowser.openBrowserAsync(
     'https://docs.expo.io/versions/latest/get-started/create-a-new-app/#making-your-first-change'
-  );
+  )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
-  },
-  contentContainer: {
-    paddingTop: 30,
-  },
-  welcomeContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
-  },
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
-  },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
-  },
   codeHighlightContainer: {
     backgroundColor: 'rgba(0,0,0,0.05)',
     borderRadius: 3,
-    paddingHorizontal: 4,
+    paddingHorizontal: 4
+  },
+  codeHighlightText: {
+    color: 'rgba(96,100,109, 0.8)'
+  },
+  container: {
+    backgroundColor: '#fff',
+    flex: 1
+  },
+  contentContainer: {
+    paddingTop: 30
+  },
+  developmentModeText: {
+    color: 'rgba(0,0,0,0.4)',
+    fontSize: 14,
+    lineHeight: 19,
+    marginBottom: 20,
+    textAlign: 'center'
+  },
+  getStartedContainer: {
+    alignItems: 'center',
+    marginHorizontal: 50
   },
   getStartedText: {
-    fontSize: 17,
     color: 'rgba(96,100,109, 1)',
+    fontSize: 17,
     lineHeight: 24,
-    textAlign: 'center',
+    textAlign: 'center'
+  },
+  helpContainer: {
+    alignItems: 'center',
+    marginTop: 15
+  },
+  helpLink: {
+    paddingVertical: 15
+  },
+  helpLinkText: {
+    color: '#2e78b7',
+    fontSize: 14
+  },
+  homeScreenFilename: {
+    marginVertical: 7
+  },
+  navigationFilename: {
+    marginTop: 5
   },
   tabBarInfoContainer: {
-    position: 'absolute',
     bottom: 0,
     left: 0,
+    position: 'absolute',
     right: 0,
     ...Platform.select({
       ios: {
         shadowColor: 'black',
         shadowOffset: { width: 0, height: -3 },
         shadowOpacity: 0.1,
-        shadowRadius: 3,
+        shadowRadius: 3
       },
       android: {
-        elevation: 20,
-      },
+        elevation: 20
+      }
     }),
     alignItems: 'center',
     backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
+    paddingVertical: 20
   },
   tabBarInfoText: {
-    fontSize: 17,
     color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
+    fontSize: 17,
+    textAlign: 'center'
   },
-  navigationFilename: {
-    marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
+  welcomeContainer: {
     alignItems: 'center',
+    marginBottom: 20,
+    marginTop: 10
   },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: '#2e78b7',
-  },
-});
+  welcomeImage: {
+    height: 80,
+    marginLeft: -10,
+    marginTop: 3,
+    resizeMode: 'contain',
+    width: 100
+  }
+})
