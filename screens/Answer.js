@@ -143,7 +143,7 @@ export default function AnswerScreen (props) {
               value={field.value}
               onChangeText={(text) => changeText(field.name, text)}
               required={field.required}
-              style={{ backgroundColor: '#fff', marginTop: 10 }}
+              style={{ backgroundColor: 'white', marginTop: 10 }}
             />
           )
         }
@@ -167,7 +167,7 @@ export default function AnswerScreen (props) {
       <TouchableOpacity disabled={!haveChange} style={{ justifyContent: 'center', marginTop: 20, marginLeft: 0, opacity: (haveChange) ? 1 : 0.3 }} onPress={() => onSubmit()}>
         <LinearGradient start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#0093FF', '#00DEFF']} style={styles.button} >
           {loading ? (
-            <ActivityIndicator size="large" color="#fff" />
+            <ActivityIndicator size="large" color="white" />
           ) : (
             <Text style={styles.buttonSubmit}>VALIDER</Text>
           )}
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
     width: '50%'
   },
   buttonSubmit: {
-    color: '#fff',
+    color: 'white',
     fontWeight: '700'
   },
   container: {

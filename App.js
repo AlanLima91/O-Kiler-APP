@@ -40,28 +40,27 @@ export default function App (props) {
 
   if (!isLoadingComplete && !props.skipLoadingScreen) {
     return null
-  } else {
-    return (
-      <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
-        <NavigationContainer linking={LinkingConfiguration}>
-          <AuthProvider>
-            <Stack.Navigator>
-              <Stack.Screen name='Home' component={BottomTabNavigator} options={{ title: 'O Killer', headerLeft: null, gesturesEnabled: false }}/>
-              <Stack.Screen name='Login' component={LoginScreen} options={{ title: 'Login', headerLeft: null, gesturesEnabled: false }}/>
-              <Stack.Screen name='Register' component={RegisterScreen} options={{ title: 'Register' }}/>
-
-            </Stack.Navigator>
-          </AuthProvider>
-        </NavigationContainer>
-      </View>
-    )
   }
+  return (
+    <View style={styles.container}>
+      {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
+      <NavigationContainer linking={LinkingConfiguration}>
+        <AuthProvider>
+          <Stack.Navigator>
+            <Stack.Screen name='Home' component={BottomTabNavigator} options={{ title: 'O Killer', headerLeft: null, gesturesEnabled: false }}/>
+            <Stack.Screen name='Login' component={LoginScreen} options={{ title: 'Login', headerLeft: null, gesturesEnabled: false }}/>
+            <Stack.Screen name='Register' component={RegisterScreen} options={{ title: 'Register' }}/>
+
+          </Stack.Navigator>
+        </AuthProvider>
+      </NavigationContainer>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     flex: 1
   }
 })

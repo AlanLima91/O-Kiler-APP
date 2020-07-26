@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   answerText: {
-    color: '#fff',
+    color: 'white',
     fontWeight: '700'
   },
   button: {

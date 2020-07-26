@@ -2,9 +2,9 @@ import React, { useEffect } from 'react'
 import * as WebBrowser from 'expo-web-browser'
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
-
 import { MonoText } from '../components/StyledText'
 import { useAuth } from '../services/provider'
+
 export default function HomeScreen (props) {
   const { handleLogout, state } = useAuth()
   const handleLogoutPress = async () => {
@@ -22,6 +22,7 @@ export default function HomeScreen (props) {
       }
     }
   }, [state])
+
   return (
     <View style={styles.container}>
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
@@ -107,7 +108,7 @@ const styles = StyleSheet.create({
     color: 'rgba(96,100,109, 0.8)'
   },
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     flex: 1
   },
   contentContainer: {
