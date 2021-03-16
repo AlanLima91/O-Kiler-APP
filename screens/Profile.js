@@ -1,13 +1,14 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native'
-import { RectButton, ScrollView } from 'react-native-gesture-handler'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
 import { LinearGradient } from 'expo-linear-gradient'
 import * as Layout from '../constants/Layout'
 import * as api from '../services/question'
 import * as apiUser from '../services/user'
 export default function ProfileScreen () {
   const [error, setError] = useState(null)
-  const [loading, setLoading] = useState(false)
+  // const [loading, setLoading] = useState(false)
   const [questions, setQuestions] = useState(null)
   const [qEnd, setQEnd] = useState(false)
   const [numQ, setNumQ] = useState(0)
@@ -93,10 +94,12 @@ const styles = StyleSheet.create({
     marginRight: 20,
     marginTop: 40
   },
+  // eslint-disable-next-line react-native/no-unused-styles
   errorText: {
     color: '#E6265C',
     fontSize: 15
   },
+  // eslint-disable-next-line react-native/no-unused-styles
   tagList: {
     marginTop: 20
   }

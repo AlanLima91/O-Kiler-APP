@@ -21,14 +21,14 @@ const reducer = (state, action) => {
     }
 
     case TEXT_CHANGE: {
-      for (var i = 0; i < state.length; i++) {
+      for (let i = 0; i < state.length; i++) {
         if (state[i].name === action.name) { state[i].value = action.text }
       }
       return [...state]
     }
 
     case LIST_CHANGE: {
-      for (var i = 0; i < state.length; i++) {
+      for (let i = 0; i < state.length; i++) {
         if (state[i].name === action.name) { state[i].value = action.data }
       }
       return [...state]

@@ -1,16 +1,14 @@
 import React, { useState, useReducer } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native'
-import { RectButton, ScrollView } from 'react-native-gesture-handler'
 import { TextInput as PaperTextInput } from 'react-native-paper'
-import reducer, { TEXT_CHANGE, BOOL_CHANGE } from '../components/reducer'
+import reducer, { TEXT_CHANGE } from '../components/reducer'
 import * as Layout from '../constants/Layout'
-import { useAuth } from '../services/provider'
 import { LinearGradient } from 'expo-linear-gradient'
 import * as api from '../services/user'
+import PropTypes from 'prop-types'
 export default function RegisterScreen (props) {
   const { navigation } = props
 
-  const { handleLogin } = useAuth()
   const [error, setError] = useState(null)
   const [haveChange, setHaveChange] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -24,7 +22,7 @@ export default function RegisterScreen (props) {
     setLoading(true)
     try {
       const data = {}
-      for (var i = 0; i < stateEncaiss.length; i++) {
+      for (let i = 0; i < stateEncaiss.length; i++) {
         data[stateEncaiss[i].name] = stateEncaiss[i].value
       }
       const response = await api.register(data)
@@ -87,6 +85,9 @@ export default function RegisterScreen (props) {
   )
 }
 
+RegisterScreen.propTypes = {
+  navigation: PropTypes.object.isRequired
+}
 const styles = StyleSheet.create({
   button: {
     alignItems: 'center',

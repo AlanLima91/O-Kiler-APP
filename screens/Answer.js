@@ -1,16 +1,41 @@
 import React, { useState, useReducer, useEffect } from 'react'
 import { Entypo } from '@expo/vector-icons'
-import * as WebBrowser from 'expo-web-browser'
 import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native'
-import { RectButton, ScrollView } from 'react-native-gesture-handler'
+import { ScrollView } from 'react-native-gesture-handler'
 import { LinearGradient } from 'expo-linear-gradient'
 import reducer, { TEXT_CHANGE, LIST_CHANGE } from '../components/reducer'
 import { TextInput as PaperTextInput } from 'react-native-paper'
 import RNPickerSelect from 'react-native-picker-select'
+import PropTypes from 'prop-types'
 
 import * as Layout from '../constants/Layout'
 import * as api from '../services/question'
 import * as apiTag from '../services/tag'
+
+const pickerSelectStyles = StyleSheet.create({
+  // eslint-disable-next-line react-native/no-unused-styles
+  inputAndroid: {
+    borderColor: 'purple',
+    borderRadius: 8,
+    borderWidth: 0.5,
+    color: 'black',
+    fontSize: 16,
+    paddingHorizontal: 10,
+    paddingRight: 30,
+    paddingVertical: 8
+  },
+  // eslint-disable-next-line react-native/no-unused-styles
+  inputIOS: {
+    borderColor: 'gray',
+    borderRadius: 4,
+    borderWidth: 1,
+    color: 'black',
+    fontSize: 16,
+    paddingHorizontal: 10,
+    paddingRight: 30,
+    paddingVertical: 12
+  }
+})
 
 export default function AnswerScreen (props) {
   const [error, setError] = useState(null)
@@ -34,13 +59,13 @@ export default function AnswerScreen (props) {
     setLoading(true)
     try {
       const newAnswer = []
-      for (var i = 0; i < answers.length; i++) {
+      for (let i = 0; i < answers.length; i++) {
         newAnswer.push({ tag: answers[i].tag._id, answer: answers[i].answer })
       }
       const data = { question: stateEncaiss[0].value, answers: newAnswer }
-      const response = await api.newQuestion(data)
+      await api.newQuestion(data)
       setAnswers([])
-      for (var i = 0; i < stateEncaiss.length; i++) {
+      for (let i = 0; i < stateEncaiss.length; i++) {
         if (stateEncaiss[i].name === 'tag') {
           changeList(stateEncaiss[i].name, null)
         } else {
@@ -177,6 +202,10 @@ export default function AnswerScreen (props) {
   )
 }
 
+AnswerScreen.propTypes = {
+  navigation: PropTypes.object.isRequired
+}
+
 const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
@@ -219,31 +248,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 10
-  },
-  select: {
-
-  }
-})
-
-const pickerSelectStyles = StyleSheet.create({
-  inputAndroid: {
-    borderColor: 'purple',
-    borderRadius: 8,
-    borderWidth: 0.5,
-    color: 'black',
-    fontSize: 16,
-    paddingHorizontal: 10,
-    paddingRight: 30,
-    paddingVertical: 8
-  },
-  inputIOS: {
-    borderColor: 'gray',
-    borderRadius: 4,
-    borderWidth: 1,
-    color: 'black',
-    fontSize: 16,
-    paddingHorizontal: 10,
-    paddingRight: 30,
-    paddingVertical: 12
   }
 })

@@ -10,7 +10,6 @@ export async function newTag (data) {
 
     return res.data
   } catch (e) {
-    console.log(e)
     throw handler(e)
   }
 }
@@ -21,7 +20,6 @@ export async function getTags () {
 
     return res.data
   } catch (e) {
-    console.log(e)
     throw handler(e)
   }
 }
@@ -32,7 +30,6 @@ export async function deleteTag (id) {
 
     return res.data
   } catch (e) {
-    console.log(e)
     throw handler(e)
   }
 }

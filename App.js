@@ -5,6 +5,7 @@ import { SplashScreen } from 'expo'
 import * as Font from 'expo-font'
 import * as React from 'react'
 import { Platform, StatusBar, StyleSheet, View } from 'react-native'
+import PropTypes from 'prop-types'
 import RegisterScreen from './screens/Register'
 import LoginScreen from './screens/Login'
 import AuthProvider from './services/provider'
@@ -13,7 +14,7 @@ import LinkingConfiguration from './navigation/LinkingConfiguration'
 
 const Stack = createStackNavigator()
 
-export default function App (props) {
+export default function App ({ skipLoadingScreen }) {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false)
   // Load any resources or data that we need prior to rendering the app
   React.useEffect(() => {
@@ -38,7 +39,7 @@ export default function App (props) {
     loadResourcesAndDataAsync()
   }, [])
 
-  if (!isLoadingComplete && !props.skipLoadingScreen) {
+  if (!isLoadingComplete && !skipLoadingScreen) {
     return null
   }
   return (
@@ -57,10 +58,12 @@ export default function App (props) {
     </View>
   )
 }
-
+App.propTypes = {
+  skipLoadingScreen: PropTypes.func.isRequired
+}
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: '#fff',
     flex: 1
   }
 })

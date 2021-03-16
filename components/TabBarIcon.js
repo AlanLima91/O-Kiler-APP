@@ -7,29 +7,29 @@ export default function TabBarIcon (props) {
   if (props.type === 'Feather') {
     return (
       <Feather
-		      	name={props.name}
-		      	size={30}
-		      	style={{ marginBottom: -3 }}
-		      	color={props.focused ? Colors.tabIconSelected : Colors.tabIconDefault}
-	    	/>
+        name={props.name}
+        size={30}
+        style={{ marginBottom: -3 }}
+        color={props.focused ? Colors.tabIconSelected : Colors.tabIconDefault}
+      />
     )
   } else if (props.type === 'Entypo') {
     return (
       <Entypo
-		      	name={props.name}
-		      	size={30}
-		      	style={{ marginBottom: -3 }}
-		      	color={props.focused ? Colors.tabIconSelected : Colors.tabIconDefault}
-	    	/>
+        name={props.name}
+        size={30}
+        style={{ marginBottom: -3 }}
+        color={props.focused ? Colors.tabIconSelected : Colors.tabIconDefault}
+      />
     )
   } else {
-	  	return (
-		    <Ionicons
-		      	name={props.name}
-		      	size={30}
-		      	style={{ marginBottom: -3 }}
-		      	color={props.focused ? Colors.tabIconSelected : Colors.tabIconDefault}
-		    />
-	  	)
+    return (
+      <Ionicons
+        name={props.name}
+        size={30}
+        style={{ marginBottom: -3 }}
+        color={props.focused ? Colors.tabIconSelected : Colors.tabIconDefault}
+      />
+    )
   }
 }

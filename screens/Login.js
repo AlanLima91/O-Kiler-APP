@@ -1,11 +1,12 @@
 import React, { useState, useReducer } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native'
-import { RectButton, ScrollView } from 'react-native-gesture-handler'
 import { TextInput as PaperTextInput } from 'react-native-paper'
-import reducer, { TEXT_CHANGE, BOOL_CHANGE } from '../components/reducer'
+import reducer, { TEXT_CHANGE } from '../components/reducer'
 import * as Layout from '../constants/Layout'
 import { useAuth } from '../services/provider'
 import { LinearGradient } from 'expo-linear-gradient'
+import PropTypes from 'prop-types'
+
 export default function LoginScreen (props) {
   const { navigation } = props
 
@@ -85,7 +86,9 @@ export default function LoginScreen (props) {
     </View>
   )
 }
-
+LoginScreen.propTypes = {
+  navigation: PropTypes.object.isRequired
+}
 const styles = StyleSheet.create({
   button: {
     alignItems: 'center',

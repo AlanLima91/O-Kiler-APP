@@ -1,10 +1,9 @@
 import React, { useState, useReducer, useEffect } from 'react'
 import { Entypo } from '@expo/vector-icons'
-import * as WebBrowser from 'expo-web-browser'
 import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native'
-import { RectButton, ScrollView } from 'react-native-gesture-handler'
+import { ScrollView } from 'react-native-gesture-handler'
 import { LinearGradient } from 'expo-linear-gradient'
-import reducer, { TEXT_CHANGE, BOOL_CHANGE } from '../components/reducer'
+import reducer, { TEXT_CHANGE } from '../components/reducer'
 import { TextInput as PaperTextInput } from 'react-native-paper'
 import * as Layout from '../constants/Layout'
 import * as api from '../services/tag'
@@ -54,7 +53,7 @@ export default function TagScreen () {
 
   const onRemove = async (i) => {
     try {
-      const response = await api.deleteTag(tags[i]._id)
+      await api.deleteTag(tags[i]._id)
 
       const temp = [...tags]
       temp.splice(i, 1)

@@ -12,7 +12,7 @@ export const QUESTION = `${API_URL}/question`
 export const TAG = `${API_URL}/tag`
 
 export const JSON_HEADER = {
-  	headers: {
-    	'Content-Type': 'application/json'
-  	}
+  headers: {
+    'Content-Type': 'application/json'
+  }
 }

@@ -1,15 +1,14 @@
 import React, { useMemo, useReducer, useContext } from 'react'
 import axios from 'axios'
-// import SInfo from 'react-native-sensitive-info';
-import * as SecureStore from 'expo-secure-store'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import * as api from './user'
+import PropTypes from 'prop-types'
 // IMPORT REDUCER, INITIAL STATE AND ACTION TYPES
 import reducer, { initialState, LOGGED_IN, LOGGED_OUT } from '../components/reducer'
 // CONFIG KEYS [Storage Keys]===================================
 export const TOKEN_KEY = 'token'
 export const USER_KEY = 'user'
 
-const KEYCHAIN_SERVICE = 'S1SVme5fIUQJnoCOrzyLHx4zhPdPznIm'
 export const keys = [TOKEN_KEY, USER_KEY]
 // CONTEXT ===================================
 const AuthContext = React.createContext()
@@ -74,7 +73,9 @@ function AuthProvider (props) {
     </AuthContext.Provider>
   )
 }
-
+AuthProvider.propTypes = {
+  children: PropTypes.object.isRequired
+}
 const useAuth = () => useContext(AuthContext)
 export { AuthContext, useAuth }
 export default AuthProvider
@@ -88,8 +89,8 @@ export const setAuthorization = (token) => {
 
 export const getStorageData = async () => {
   try {
-    const token = await SecureStore.getItemAsync(TOKEN_KEY, { keychainService: KEYCHAIN_SERVICE })
-    const user = await SecureStore.getItemAsync(USER_KEY, { keychainService: KEYCHAIN_SERVICE })
+    const token = await AsyncStorage.getItem(TOKEN_KEY)
+    const user = await AsyncStorage.getItem(USER_KEY)
     if (token !== null && user !== null) return { token, user: JSON.parse(user) }
     else return null
   } catch (error) {
@@ -102,18 +103,14 @@ export const setStorageData = async (data) => {
   try {
     if (!data) {
       for (var i = 0; i < keys.length; i++) {
-        await SecureStore.deleteItemAsync(keys[i], {
-          keychainService: KEYCHAIN_SERVICE
-        })
+        await AsyncStorage.removeItem(keys[i])
       }
       return
     }
     const { token, user } = data
     const data_ = [[USER_KEY, JSON.stringify(user)], [TOKEN_KEY, token]]
     for (var y = 0; y < data_.length; y++) {
-      await SecureStore.setItemAsync(data_[y][0], data_[y][1], {
-        keychainService: KEYCHAIN_SERVICE
-      })
+      await AsyncStorage.setItem(data_[y][0], data_[y][1])
     }
   } catch (error) {
     throw new Error(error)

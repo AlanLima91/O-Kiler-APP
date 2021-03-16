@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import * as WebBrowser from 'expo-web-browser'
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import PropTypes from 'prop-types'
 import { ScrollView } from 'react-native-gesture-handler'
 import { MonoText } from '../components/StyledText'
 import { useAuth } from '../services/provider'
@@ -29,6 +30,7 @@ export default function HomeScreen (props) {
         <View style={styles.welcomeContainer}>
           <Image
             source={
+              // eslint-disable-next-line no-undef
               __DEV__
                 ? require('../assets/images/robot-dev.png')
                 : require('../assets/images/robot-prod.png')
@@ -60,12 +62,15 @@ export default function HomeScreen (props) {
     </View>
   )
 }
-
+HomeScreen.propTypes = {
+  navigation: PropTypes.object.isRequired
+}
 HomeScreen.navigationOptions = {
   header: null
 }
 
 function DevelopmentModeNotice () {
+  // eslint-disable-next-line no-undef
   if (__DEV__) {
     const learnMoreButton = (
       <Text onPress={handleLearnMorePress} style={styles.helpLinkText}>
@@ -92,6 +97,7 @@ function handleLearnMorePress () {
   WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/workflow/development-mode/')
 }
 
+// eslint-disable-next-line no-unused-vars
 function handleHelpPress () {
   WebBrowser.openBrowserAsync(
     'https://docs.expo.io/versions/latest/get-started/create-a-new-app/#making-your-first-change'
@@ -103,9 +109,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.05)',
     borderRadius: 3,
     paddingHorizontal: 4
-  },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)'
   },
   container: {
     backgroundColor: 'white',
@@ -144,34 +147,6 @@ const styles = StyleSheet.create({
   },
   homeScreenFilename: {
     marginVertical: 7
-  },
-  navigationFilename: {
-    marginTop: 5
-  },
-  tabBarInfoContainer: {
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3
-      },
-      android: {
-        elevation: 20
-      }
-    }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20
-  },
-  tabBarInfoText: {
-    color: 'rgba(96,100,109, 1)',
-    fontSize: 17,
-    textAlign: 'center'
   },
   welcomeContainer: {
     alignItems: 'center',
