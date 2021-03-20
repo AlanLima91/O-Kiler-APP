@@ -1,14 +1,18 @@
-import React, { useEffect } from 'react'
-import { StyleSheet, Text, TouchableOpacity, View, Dimensions } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { StyleSheet, Text, TouchableOpacity, View, Dimensions, TextInput } from 'react-native'
 import PropTypes from 'prop-types'
 import { AntDesign } from '@expo/vector-icons'
 import { ScrollView } from 'react-native-gesture-handler'
 import { useAuth } from '../services/provider'
+import { getAllGamePlay } from '../services/player'
+import { joinedGamePlay } from '../services/gameplay'
 
 const fullWidth = Dimensions.get('window').width
 
 export default function HomeScreen (props) {
   const { handleLogout, state } = useAuth()
+  const [gamePlay, setGamePlay] = useState([])
+  const [keyJoined, setKeyJoined] = useState(null)
   const handleLogoutPress = async () => {
     try {
       await handleLogout()
@@ -20,9 +24,29 @@ export default function HomeScreen (props) {
   const goToCreateGame = () => {
     props.navigation.navigate('NewGamePlay')
   }
+  const handleKeyJoined = (value) => {
+    setKeyJoined(value)
+  }
+  const callAllGamePlay = async () => {
+    try {
+      const gamePlay = await getAllGamePlay()
+      console.log(gamePlay)
+      setGamePlay(gamePlay.gameplays)
+    } catch (e) {
+      console.error(e)
+    }
+  }
+  const joinedGame = async () => {
+    joinedGamePlay({ keyJoined })
+    callAllGamePlay()
+  }
+  const goToGame = (id) => {
+    console.log(id)
+    // props.navigation.navigate('Gameplay', { id: id })
+  }
   useEffect(() => {
     if (state && state.user) {
-      //
+      callAllGamePlay()
     }
   }, [state])
 
@@ -38,6 +62,29 @@ export default function HomeScreen (props) {
           </View>
           <View style={styles.containerRound}>
             <Text>REJOINS UNE PARTIE SANGLANTE EXISTANTE</Text>
+            <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', borderRadius: 20, borderColor: '#000', borderWidth: 2, paddingLeft: 10 }}>
+              <TextInput
+                placeholder={'Rentre ton code'}
+                value={keyJoined}
+                onChangeText={handleKeyJoined}
+                style={{ height: 40 }}
+              />
+              <TouchableOpacity onPress={joinedGame} style={{ backgroundColor: '#ff6666', borderRadius: 20, marginLeft: 10, paddingHorizontal: 15, paddingVertical: 10 }}>
+                <Text>OK</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View>
+            {gamePlay.map((games) => {
+              return (
+                <View key={games.id} style={styles.containerRound}>
+                  <Text>{games.name}</Text>
+                  <TouchableOpacity onPress={() => goToGame(games.id)} style={{ marginTop: 10 }}>
+                    <AntDesign name="pluscircleo" size={24} color="black" />
+                  </TouchableOpacity>
+                </View>
+              )
+            })}
           </View>
           <TouchableOpacity onPress={handleLogoutPress} style={styles.helpLink}>
             <Text style={styles.helpLinkText}>Logout</Text>

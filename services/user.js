@@ -1,12 +1,10 @@
-import axios from 'axios'
-
-import * as c from './constant'
+import axiosAPI from './axiosAPI'
 
 import { handler } from './handler'
 
 export async function login (data) {
   try {
-    const res = await axios.post(c.LOGIN, data)
+    const res = await axiosAPI.post('login', data)
 
     return res.data
   } catch (e) {
@@ -16,7 +14,7 @@ export async function login (data) {
 
 export async function register (data) {
   try {
-    const res = await axios.post(c.REGISTER, data)
+    const res = await axiosAPI.post('register', data)
 
     return res.data
   } catch (e) {
@@ -26,17 +24,7 @@ export async function register (data) {
 
 export async function loginJWT (data) {
   try {
-    const res = await axios.post(c.LOGINJWT, data)
-
-    return res.data
-  } catch (e) {
-    throw handler(e)
-  }
-}
-
-export async function addTags (data) {
-  try {
-    const res = await axios.patch(`${c.USER}/addTags`, data)
+    const res = await axiosAPI.post('loginjwt', data)
 
     return res.data
   } catch (e) {

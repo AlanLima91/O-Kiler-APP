@@ -30,9 +30,9 @@ export async function launchGamePlay (data) {
   }
 }
 
-export async function getAllQuestion (limit) {
+export async function getAllGamePlay () {
   try {
-    const res = await axiosAPI.get(`gameplays/${limit}`)
+    const res = await axiosAPI.get('gameplays')
 
     return res.data
   } catch (e) {
