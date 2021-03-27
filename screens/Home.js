@@ -45,8 +45,14 @@ export default function HomeScreen (props) {
     }
   }
   const joinedGame = async () => {
-    joinedGamePlay({ keyJoined })
-    callAllGamePlay()
+    try {
+      await joinedGamePlay({ keyJoined: keyJoined.toUpperCase() })
+      alert('Félicitation vous avez rejoint une nouvelle partie.')
+      setKeyJoined(null)
+      callAllGamePlay()
+    } catch (e) {
+      alert('Fail to joined' + e.message)
+    }
   }
   const goToGame = (id) => {
     alert('Go To Game : ' + id)
