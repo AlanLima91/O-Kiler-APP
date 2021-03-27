@@ -74,13 +74,12 @@ export default function NewGamePlayScreen (props) {
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
       <Text>Crée une nouvelle partie</Text>
-      {error && (
-        <Text style={styles.errorText}>{error}</Text>
-      )}
+      {error && <Text style={styles.errorText}>{error}</Text>}
       <PaperTextInput
         mode={'outlined'}
         label={'Nom de la partie'}
         placeholder={'Nom'}
+        maxLength={50}
         value={name}
         onChangeText={onNameChange}
         required={true}
@@ -95,7 +94,12 @@ export default function NewGamePlayScreen (props) {
         />
       </View>
       <TouchableOpacity style={{ justifyContent: 'center', marginTop: 20, marginLeft: 0 }} onPress={onSubmit}>
-        <LinearGradient start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#0093FF', '#00DEFF']} style={styles.button} >
+        <LinearGradient
+          start={{ x: 0, y: 1 }}
+          end={{ x: 1, y: 0 }}
+          colors={['#0093FF', '#00DEFF']}
+          style={styles.button}
+        >
           {loading ? (
             <ActivityIndicator size="large" color="white" />
           ) : (

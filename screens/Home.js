@@ -1,5 +1,14 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, TouchableOpacity, View, Dimensions, TextInput } from 'react-native'
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  Dimensions,
+  TextInput,
+  TouchableWithoutFeedback
+} from 'react-native'
 import PropTypes from 'prop-types'
 import { AntDesign } from '@expo/vector-icons'
 import { ScrollView } from 'react-native-gesture-handler'
@@ -10,7 +19,7 @@ import { joinedGamePlay } from '../services/gameplay'
 const fullWidth = Dimensions.get('window').width
 
 export default function HomeScreen (props) {
-  const { handleLogout, state } = useAuth()
+  const { handleLogout } = useAuth()
   const [gamePlay, setGamePlay] = useState([])
   const [keyJoined, setKeyJoined] = useState(null)
   const handleLogoutPress = async () => {
@@ -30,7 +39,6 @@ export default function HomeScreen (props) {
   const callAllGamePlay = async () => {
     try {
       const gamePlay = await getAllGamePlay()
-      console.log(gamePlay)
       setGamePlay(gamePlay.gameplays)
     } catch (e) {
       console.error(e)
@@ -41,15 +49,37 @@ export default function HomeScreen (props) {
     callAllGamePlay()
   }
   const goToGame = (id) => {
-    console.log(id)
+    alert('Go To Game : ' + id)
     // props.navigation.navigate('Gameplay', { id: id })
   }
   useEffect(() => {
-    if (state && state.user) {
-      callAllGamePlay()
+    callAllGamePlay()
+  }, [])
+  const convertStatus = (status) => {
+    switch (status) {
+      case 'pending':
+        return 'En attente'
+      case 'started':
+        return 'En cours'
+      case 'finished':
+        return 'Terminé'
+      default:
+        return 'En attente'
     }
-  }, [state])
+  }
 
+  const getColorStatus = (status) => {
+    switch (status) {
+      case 'pending':
+        return '#0000ff'
+      case 'started':
+        return '#33cc33'
+      case 'finished':
+        return '#c2c2d6'
+      default:
+        return '#0000ff'
+    }
+  }
   return (
     <View style={styles.container}>
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
@@ -61,15 +91,34 @@ export default function HomeScreen (props) {
             </TouchableOpacity>
           </View>
           <View style={styles.containerRound}>
-            <Text>REJOINS UNE PARTIE SANGLANTE EXISTANTE</Text>
-            <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', borderRadius: 20, borderColor: '#000', borderWidth: 2, paddingLeft: 10 }}>
+            <Text>REJOINS UNE PARTIE SANGLANTE</Text>
+            <View
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                borderRadius: 20,
+                borderColor: '#000',
+                borderWidth: 2,
+                paddingLeft: 10
+              }}
+            >
               <TextInput
                 placeholder={'Rentre ton code'}
                 value={keyJoined}
                 onChangeText={handleKeyJoined}
                 style={{ height: 40 }}
               />
-              <TouchableOpacity onPress={joinedGame} style={{ backgroundColor: '#ff6666', borderRadius: 20, marginLeft: 10, paddingHorizontal: 15, paddingVertical: 10 }}>
+              <TouchableOpacity
+                onPress={joinedGame}
+                style={{
+                  backgroundColor: '#ff6666',
+                  borderRadius: 20,
+                  marginLeft: 10,
+                  paddingHorizontal: 15,
+                  paddingVertical: 10
+                }}
+              >
                 <Text>OK</Text>
               </TouchableOpacity>
             </View>
@@ -77,17 +126,23 @@ export default function HomeScreen (props) {
           <View>
             {gamePlay.map((games) => {
               return (
-                <View key={games.id} style={styles.containerRound}>
-                  <Text>{games.name}</Text>
-                  <TouchableOpacity onPress={() => goToGame(games.id)} style={{ marginTop: 10 }}>
-                    <AntDesign name="pluscircleo" size={24} color="black" />
-                  </TouchableOpacity>
-                </View>
+                <TouchableWithoutFeedback key={games.id} onPress={() => goToGame(games.id)}>
+                  <View style={styles.containerRoundGame}>
+                    <View>
+                      <Text numberOfLines={1} style={styles.titleGame}>
+                        {games.name}
+                      </Text>
+                    </View>
+                    <View style={[styles.statusBulle, { backgroundColor: getColorStatus(games.gameplayState) }]}>
+                      <Text style={{ color: '#fff' }}>{convertStatus(games.gameplayState)}</Text>
+                    </View>
+                  </View>
+                </TouchableWithoutFeedback>
               )
             })}
           </View>
           <TouchableOpacity onPress={handleLogoutPress} style={styles.helpLink}>
-            <Text style={styles.helpLinkText}>Logout</Text>
+            <Text style={styles.helpLinkText}>Déconnexion</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -109,7 +164,16 @@ const styles = StyleSheet.create({
   containerRound: {
     alignItems: 'center',
     backgroundColor: '#ff052f',
-    borderRadius: 20,
+    borderRadius: 15,
+    justifyContent: 'center',
+    marginBottom: 20,
+    minHeight: 100,
+    width: fullWidth * 0.9
+  },
+  containerRoundGame: {
+    alignItems: 'center',
+    backgroundColor: '#000',
+    borderRadius: 15,
     justifyContent: 'center',
     marginBottom: 20,
     minHeight: 100,
@@ -128,5 +192,19 @@ const styles = StyleSheet.create({
   helpLinkText: {
     color: '#2e78b7',
     fontSize: 14
+  },
+  statusBulle: {
+    borderRadius: 20,
+    bottom: 0,
+    paddingHorizontal: 20,
+    paddingVertical: 5,
+    position: 'absolute'
+  },
+  titleGame: {
+    color: '#fff',
+    fontFamily: 'HVD',
+    fontSize: 23,
+    lineHeight: 30,
+    paddingHorizontal: 10
   }
 })
