@@ -57,7 +57,7 @@ export default function NewGamePlayScreen (props) {
       await newGamePlay(data)
       setLoading(false)
       setError(null)
-      props.navigation.navigate('Home')
+      props.navigation.navigate('Home', { reload: true })
     } catch (e) {
       setError(e.message)
       setLoading(false)

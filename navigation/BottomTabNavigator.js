@@ -7,7 +7,7 @@ import { useAuth } from '../services/provider'
 // const BottomTab = createBottomTabNavigator()
 // const INITIAL_ROUTE_NAME = 'Home'
 
-export default function BottomTabNavigator ({ navigation }) {
+export default function BottomTabNavigator ({ navigation, route }) {
   const { state, getAuthState } = useAuth()
   const checkIsLoggin = async () => {
     const user = await getAuthState()
@@ -17,8 +17,9 @@ export default function BottomTabNavigator ({ navigation }) {
     checkIsLoggin()
   }, [])
   if (!state?.user) return null
-  return <HomeScreen navigation={navigation} />
+  return <HomeScreen navigation={navigation} route={route} />
 }
 BottomTabNavigator.propTypes = {
-  navigation: PropTypes.object.isRequired
+  navigation: PropTypes.object.isRequired,
+  route: PropTypes.object
 }

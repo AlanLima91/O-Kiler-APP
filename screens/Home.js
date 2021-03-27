@@ -86,6 +86,10 @@ export default function HomeScreen (props) {
         return '#0000ff'
     }
   }
+  useEffect(() => {
+    // eslint-disable-next-line curly
+    if (props.route.params?.reload) callAllGamePlay()
+  }, [props.route])
   return (
     <View style={styles.container}>
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
@@ -156,7 +160,8 @@ export default function HomeScreen (props) {
   )
 }
 HomeScreen.propTypes = {
-  navigation: PropTypes.object.isRequired
+  navigation: PropTypes.object,
+  route: PropTypes.object
 }
 HomeScreen.navigationOptions = {
   header: null
