@@ -87,7 +87,7 @@ export default function LoginScreen (props) {
   )
 }
 LoginScreen.propTypes = {
-  navigation: PropTypes.object.isRequired
+  navigation: PropTypes.object
 }
 const styles = StyleSheet.create({
   button: {

@@ -11,7 +11,7 @@ import LoginScreen from './screens/Login'
 import AuthProvider from './services/provider'
 import BottomTabNavigator from './navigation/BottomTabNavigator'
 import LinkingConfiguration from './navigation/LinkingConfiguration'
-
+import NewGamePlayScreen from './screens/NewGamePlay'
 const Stack = createStackNavigator()
 
 export default function App ({ skipLoadingScreen }) {
@@ -25,7 +25,8 @@ export default function App ({ skipLoadingScreen }) {
         // Load fonts
         await Font.loadAsync({
           ...Ionicons.font,
-          'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf')
+          'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
+          HVD: require('./assets/fonts/HVD_Comic_Serif_Pro-webfont.ttf')
         })
       } catch (e) {
         // We might want to provide this error information to an error reporting service
@@ -48,10 +49,18 @@ export default function App ({ skipLoadingScreen }) {
       <NavigationContainer linking={LinkingConfiguration}>
         <AuthProvider>
           <Stack.Navigator>
-            <Stack.Screen name='Home' component={BottomTabNavigator} options={{ title: 'O Killer', headerLeft: null, gesturesEnabled: false }}/>
-            <Stack.Screen name='Login' component={LoginScreen} options={{ title: 'Login', headerLeft: null, gesturesEnabled: false }}/>
-            <Stack.Screen name='Register' component={RegisterScreen} options={{ title: 'Register' }}/>
-
+            <Stack.Screen
+              name="Home"
+              component={BottomTabNavigator}
+              options={{ title: 'O Killer', headerLeft: null, gesturesEnabled: false }}
+            />
+            <Stack.Screen
+              name="Login"
+              component={LoginScreen}
+              options={{ title: 'Login', headerLeft: null, gesturesEnabled: false }}
+            />
+            <Stack.Screen name="Register" component={RegisterScreen} options={{ title: 'Register' }} />
+            <Stack.Screen name="NewGamePlay" component={NewGamePlayScreen} options={{ title: 'Nouvelle Partie' }} />
           </Stack.Navigator>
         </AuthProvider>
       </NavigationContainer>
@@ -59,7 +68,7 @@ export default function App ({ skipLoadingScreen }) {
   )
 }
 App.propTypes = {
-  skipLoadingScreen: PropTypes.func.isRequired
+  skipLoadingScreen: PropTypes.bool
 }
 const styles = StyleSheet.create({
   container: {

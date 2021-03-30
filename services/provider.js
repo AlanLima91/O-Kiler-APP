@@ -1,5 +1,5 @@
 import React, { useMemo, useReducer, useContext } from 'react'
-import axios from 'axios'
+import { setAxiosToken } from './axiosAPI'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import * as api from './user'
 import PropTypes from 'prop-types'
@@ -35,13 +35,13 @@ function AuthProvider (props) {
     try {
       let newData
       if (isJwt) {
-        setAuthorization(data.token)
+        setAxiosToken(data.token)
         newData = await api.loginJWT(data)
         setStorageData(data)
       } else {
         newData = await api.login(data)
         await setStorageData(newData) // STORE DATA
-        setAuthorization(newData.token) // AXIOS AUTHORIZATION HEADER
+        setAxiosToken(newData.token) // AXIOS AUTHORIZATION HEADER
       }
       dispatch({ type: LOGGED_IN, user: newData.user }) // DISPATCH TO REDUCER
 
@@ -56,7 +56,7 @@ function AuthProvider (props) {
   const handleLogout = async () => {
     try {
       await setStorageData() // REMOVE DATA
-      setAuthorization(null) // AXIOS AUTHORIZATION HEADER
+      setAxiosToken(null) // AXIOS AUTHORIZATION HEADER
       dispatch({ type: LOGGED_OUT })// DISPATCH TO REDUCER
     } catch (error) {
       throw new Error(error)
@@ -79,13 +79,6 @@ AuthProvider.propTypes = {
 const useAuth = () => useContext(AuthContext)
 export { AuthContext, useAuth }
 export default AuthProvider
-
-// HELPERS ===================================
-export const setAuthorization = (token) => {
-  // Apply authorization token to every request if logged in
-  if (!token) delete axios.defaults.headers.common.Authorization
-  else axios.defaults.headers.common.Authorization = `Bearer ${token}`
-}
 
 export const getStorageData = async () => {
   try {
